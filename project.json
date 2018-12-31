@@ -1,0 +1,21 @@
+{
+	"file" : "index.html",
+	"general" :
+	{
+		"properties" :
+		{
+			"schemecolor" :
+			{
+				"text" : "Scheme color",
+				"type" : "color",
+				"value" : "0 0 0"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ ],
+	"title" : "Bottle",
+	"type" : "web",
+	"visibility" : "public",
+	"workshopid" : 000000
+}

@@ -1,0 +1,39 @@
+svg {
+    filter: url("#filter");
+  }
+  body {
+    overflow:hidden;
+    /* transform: scale(0.5); */
+    background: #fab12d;
+    margin: 0;
+    padding: 0;
+  }
+  img {
+    z-index: 999;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 113px;
+    padding-top: 53px;
+    padding-left: 0;
+  }
+  .credit{
+    position: absolute;
+    top: 1rem;
+    right:1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#fff;
+    font-weight: 100;
+    font-size: 1.5em;
+  }
+  span{
+    font-weight: 400;
+  }
+  .small{
+    font-size: .8em;
+    font-weight: 100;
+
+  }
