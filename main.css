@@ -2,7 +2,7 @@ svg {
     filter: url("#filter");
   }
   body {
-    zoom: .5;
+    transform: scale(.5);
     overflow:hidden;
     /* transform: scale(0.5); */
     background: #fab12d;
