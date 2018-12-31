@@ -12,10 +12,20 @@
 
 </head>
 <body>
+  
   <img src="bottle.png">
   <div class="credit">
     <span class="small">By</span><span>Netha</span>.Mi
   </div>
+  <svg style="width:0; height:0;">
+    <defs>
+      <filter id="filter">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 28 -10" result="filter" />
+        <feComposite in="SourceGraphic" in2="filter" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
 <script src="main.js"></script>
 </body>
 </html>
