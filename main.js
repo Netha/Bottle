@@ -1,5 +1,7 @@
 "use strict";
-d3.selection.prototype.appendSVG = d3.selection.enter.prototype.appendSVG = function(SVGString) {
+d3.selection.prototype.appendSVG = d3.selection.enter.prototype.appendSVG = function(
+  SVGString
+) {
   return this.select(function() {
     return this.appendChild(
       document.importNode(
@@ -25,9 +27,8 @@ var pgDefs = [
   // {nodes:[[0.5, 0.1], [1.9, 0.1], [1.9, 2.5], [0.5, 1.0]]},
   // { nodes: [[-0.5, 0.1], [-1.9, 0.1], [-1.9, 2.5], [-0.5, 1.0]] } ,
   {
-    nodes: [[200, -130],[200, 430],  [-200, 430], [-200, -130]]
-  },
-
+    nodes: [[200, -130], [200, 430], [-200, 430], [-200, -130]]
+  }
 ];
 
 var test = [
@@ -136,7 +137,7 @@ var liquidFunWorld = {
     // Start Particle (Module related from here)
     psd = new b2ParticleSystemDef();
     psd.radius = 0.04; //0.05//
-    psd.dampingStrength = 0.1; //0.1 
+    psd.dampingStrength = 0.1; //0.1
 
     particleSystem = world.CreateParticleSystem(psd);
 
@@ -164,12 +165,12 @@ var liquidFunWorld = {
         },
         true
       );
-    } else
-     if (window.DeviceMotionEvent) {
+    } else if (window.DeviceMotionEvent) {
       window.addEventListener("devicemotion", function(e) {
         if (e.acceleration.x * 2 && e.acceleration.y * 2) {
-          var gravity_1 = new b2Vec2(e.acceleration.y * 2 / 5,
-            -e.acceleration.x * 2 / 4
+          var gravity_1 = new b2Vec2(
+            (e.acceleration.y * 2) / 5,
+            (-e.acceleration.x * 2) / 4
           );
           this.world.SetGravity(gravity_1);
         }
@@ -178,17 +179,23 @@ var liquidFunWorld = {
     var onMotion = function(x, y) {
       if (x && y) {
         // var gravity_1 = new b2Vec2((-y) / 5, (x) / 4);
-        var gravity_1 = new b2Vec2((y) / 5, (-x) / 4);
+        var gravity_1 = new b2Vec2(y / 5, -x / 4);
         world.SetGravity(gravity_1);
       }
     };
     if (window.DeviceMotionEvent) {
-     window.addEventListener('devicemotion', function(e) {
-       onMotion(e.accelerationIncludingGravity.y * 10, e.accelerationIncludingGravity.x * 10*-1);
-     //  _this.onMotion(e.accelerationIncludingGravity.y * 10, e.accelerationIncludingGravity.x * 10*-1);
-
-     }, true);
-   }
+      window.addEventListener(
+        "devicemotion",
+        function(e) {
+          onMotion(
+            e.accelerationIncludingGravity.y * 10,
+            e.accelerationIncludingGravity.x * 10 * -1
+          );
+          //  _this.onMotion(e.accelerationIncludingGravity.y * 10, e.accelerationIncludingGravity.x * 10*-1);
+        },
+        true
+      );
+    }
   },
   update: function() {
     world.Step(timeStep, velocityIterations, positionIterations);
@@ -205,9 +212,33 @@ var init = function() {
 
 var render = function() {
   liquidFunWorld.update();
-  d3Renderer.render(world);
+  // d3Renderer.render(world);
+  draw(world);
   window.requestAnimationFrame(render);
 };
+
+function draw(world) {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  ctx.globalCompositeOperation = "destination-over";
+  ctx.clearRect(0, 0, 300, 500); // clear canvas
+
+  let system = world.particleSystems[0];
+
+  let data = system.particleGroups;
+  let positionBuf = system.GetPositionBuffer();
+  let leng = data[0];
+  let offset = leng.GetBufferIndex();
+
+  for (let i = 0; i < leng.GetParticleCount(); i++) {
+    let prticale = {
+      prt: i,
+      cx: positionBuf[(i + offset) * 2] * 100 + 150,
+      cy: positionBuf[(i + offset) * 2 + 1] * -100 + 450
+    };
+    ctx.fillStyle = "#A3252A";
+    ctx.fillRect(prticale.cx, prticale.cy, 10, 10);
+  }
+}
 
 var d3Renderer = {
   init: function() {
@@ -227,7 +258,7 @@ var d3Renderer = {
     d3Renderer.drawParicles(viz, world.particleSystems[0]);
   },
   drawBodies: function(selection, bodies) {
-    // 
+    //
     var bounds = d3.svg
       .line()
       .x(function(vec) {
@@ -247,8 +278,7 @@ var d3Renderer = {
       .attr("stroke", "black")
       .attr("stroke-width", 0); // 0.01);
     bodyGroups.each(function(b) {
-      d3
-        .select(this)
+      d3.select(this)
         .selectAll("path")
         .data(b.fixtures)
         .enter()
@@ -259,13 +289,13 @@ var d3Renderer = {
     });
     bodyGroups.attr("transform", function(b) {
       var pos = b.GetPosition(),
-        angle = b.GetAngle() * 180 / Math.PI;
+        angle = (b.GetAngle() * 180) / Math.PI;
       return "translate(" + pos.x + ", " + pos.y + "), rotate(" + angle + ")";
     });
     bodyGroups.exit().remove();
   },
   drawParicles: function(selection, system) {
-    // 
+    //
     var particleGroup = selection
       .selectAll("g.particle")
       .data(system.particleGroups);

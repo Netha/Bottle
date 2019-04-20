@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Live Wallpaper</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="assets/d3.v3.min.js"></script>
-    <script src="assets/liquidfun.js"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Live Wallpaper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="assets/d3.v3.min.js"></script>
+  <script src="assets/liquidfun.js"></script>
 
 </head>
+
 <body>
+  <canvas id="canvas" width="300" height="500"></canvas>
+
   <svg style="width:0; height:0;">
     <defs>
       <filter id="filter">
@@ -25,7 +29,9 @@
   <div class="credit">
     <span class="small">By</span><span>Netha</span>.Mi
   </div>
-  
-<script src="main.js"></script>
+
+
+  <script src="main.js"></script>
 </body>
+
 </html>
