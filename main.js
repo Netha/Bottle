@@ -340,9 +340,10 @@ var d3Renderer = {
 
 window.onload = init;
 
-document.getElementsByTagName("body").addEventListener("dblclick", () => {
+document.body.addEventListener("dblclick", () => {
   toggleFullScreen();
 });
+
 function toggleFullScreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen();
